@@ -1,0 +1,14 @@
+version: 0.0.1
+struct: [prefix, address, length, command, data, suffix]
+parts:
+  prefix:
+    value: 1
+  suffix:
+    value: 2
+  address:
+    bytesCount : 4
+  command :
+    bytesCount : 2
+  length :
+    dependsOn : [command, data]
+  data:
