@@ -65,4 +65,3 @@ parts:
     }
 ``` 
 <i>(Example using interpreter 1)</i><br>
-I am writing to understand how interesting this topic is and whether it is worth developing the project in the future.
