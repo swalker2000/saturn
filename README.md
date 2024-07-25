@@ -1,4 +1,4 @@
-Worked a lot with various devices via serial interfaces (RS485, RS232). Quite often I was faced with the need to support one or another modbas-like protocol and each time I had to almost write a parser and message generator from scratch. The idea came to make a certain language for describing these protocols and configure an interpreter and generator based on a file written in this language. I implement most of the projects in Kotlin (yes, I know that only Back and Android are currently written in it, but despite this, many embedded devices with a more or less full-fledged OS use the JVM), so this language was chosen to write a <b>pre-prototype</b> of the interpreter. In order not to invent my own syntax, I chose yaml as a markup language. In a couple of evenings I wrote the first pre-prototype of the library to evaluate the complexity and pitfalls.
+ Language for describing modbas-like protocol protocols and a <b>pre-prototype</b> of the interpreter.
 ``` yaml
 version: 0.0.1
 struct: [prefix, separator, address, separator, command, separator, data, separator, suffix]
