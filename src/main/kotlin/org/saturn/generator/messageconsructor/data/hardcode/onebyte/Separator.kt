@@ -1,4 +1,3 @@
 package org.saturn.generator.messageconsructor.data.hardcode.onebyte
 
-class Seporator {
-}
+class Separator(byte : Int) : OneByteHardcodePart(byte)

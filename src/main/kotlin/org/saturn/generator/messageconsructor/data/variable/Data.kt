@@ -1,4 +1,3 @@
 package org.saturn.generator.messageconsructor.data.variable
 
-class Data {
-}
+class Data(bytesInPartCount : Int) : VariablePart(bytesInPartCount )

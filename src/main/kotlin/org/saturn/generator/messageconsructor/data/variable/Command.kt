@@ -1,4 +1,5 @@
 package org.saturn.generator.messageconsructor.data.variable
 
-class Command {
-}
+import org.saturn.generator.messageconsructor.data.Part
+
+ class Command(bytesInPartCount : Int) : VariablePart(bytesInPartCount)

@@ -1,4 +1,4 @@
-package org.saturn.generator.messageconsructor.parser.strategy.separator
+package org.saturn.generator.messageconsructor.parser.strategy.length
 
 import org.saturn.generator.messageconsructor.data.Part
 import org.saturn.generator.messageconsructor.data.depends.length.Length
@@ -7,14 +7,28 @@ import org.saturn.generator.messageconsructor.data.variable.Address
 import org.saturn.generator.messageconsructor.data.variable.Command
 import org.saturn.generator.messageconsructor.data.variable.Data
 import org.saturn.generator.messageconsructor.parser.strategy.CheckResult
+import org.saturn.generator.messageconsructor.parser.strategy.CommonCheckItems
 import org.saturn.generator.messageconsructor.parser.strategy.ParseStrategy
 import org.saturn.generator.usefuldata.UsefulData
 
 class LengthParseStrategy(private val parts: List<Part>) : ParseStrategy {
 
     private val mirror : Int = if(parts.any { it is Mirror }) parts.first { it is Mirror }.getBytesInMessage()[0] else -1
+    private val commonCheckItems = CommonCheckItems(parts)
     override fun check(data: List<Int>): CheckResult {
-        TODO("Not yet implemented")
+
+        val minMessageLength = parts.filter { it.bytesInPartCount>-1 }.sumOf { it.bytesInPartCount }
+        if(minMessageLength>data.size)
+            return CheckResult(false, listOf("Message to short. Wait : >$minMessageLength, have : ${data.size}"))
+        val items = getItems(data)
+        val checkList = listOf(commonCheckItems.checkItemsCount,  commonCheckItems.checkSuffix, commonCheckItems.checkPrefix, commonCheckItems.checkLength)
+        for( i in 0..checkList.lastIndex)
+        {
+            val checkResult = checkList[i].exam(items)
+            if(!checkResult.success)
+                return checkResult
+        }
+        return CheckResult(true)
     }
 
     override fun parse(messageData: List<Int>): UsefulData {
@@ -48,7 +62,7 @@ class LengthParseStrategy(private val parts: List<Part>) : ParseStrategy {
             return lengthPart.dependsOn.filter { it.bytesInPartCount>=0 }.sumOf { it.bytesInPartCount }
         }
 
-        val items : MutableList<MutableList<Int>> = mutableListOf()
+        val items : MutableList<MutableList<Int>> = mutableListOf(mutableListOf())
         var partNumber = 0
         var length = 0
         (0..data.lastIndex).forEach { index->

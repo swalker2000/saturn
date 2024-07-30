@@ -1,3 +1,5 @@
+package org.saturn.generator
+
 fun main(args: Array<String>) {
     println("Hello World!")
 

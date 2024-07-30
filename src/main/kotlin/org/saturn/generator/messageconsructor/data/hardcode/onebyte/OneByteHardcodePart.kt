@@ -1,5 +1,5 @@
-package org.saturn.generator.messageconsructor.data.constant.onebyte
+package org.saturn.generator.messageconsructor.data.hardcode.onebyte
 
-import org.saturn.generator.messageconsructor.data.constant.HardcodePart
+import org.saturn.generator.messageconsructor.data.hardcode.HardcodePart
 
-abstract class OneByteHardcodePart(byte : Int) : HardcodePart(listOf(byte))
+open class OneByteHardcodePart(byte : Int) : HardcodePart(listOf(byte), 1)

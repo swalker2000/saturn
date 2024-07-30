@@ -1,5 +1,5 @@
 version: 0.0.1
-struct: [prefix, separator, address, separator, length, separator, command, separator, data, separator, suffix]
+struct: [prefix, separator, address, separator, command, separator, data, separator, suffix]
 parts:
   prefix:
     value: 1
@@ -9,6 +9,6 @@ parts:
     bytesCount : 4
   command :
     bytesCount : 2
-  length :
-    dependsOn : [command, data]
+  separator :
+    value : 255
   data:

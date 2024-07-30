@@ -1,4 +1,3 @@
-package org.saturn.generator.messageconsructor.data.constant.onebyte
+package org.saturn.generator.messageconsructor.data.hardcode.onebyte
 
-class Mirrow {
-}
+class Mirror(byte : Int) : OneByteHardcodePart(byte)

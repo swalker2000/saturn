@@ -11,6 +11,8 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.yaml/snakeyaml
+    implementation 'org.yaml:snakeyaml:2.2'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
 }
 
