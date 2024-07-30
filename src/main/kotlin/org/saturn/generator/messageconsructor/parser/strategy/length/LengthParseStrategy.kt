@@ -11,6 +11,10 @@ import org.saturn.generator.messageconsructor.parser.strategy.CommonCheckItems
 import org.saturn.generator.messageconsructor.parser.strategy.ParseStrategy
 import org.saturn.generator.usefuldata.UsefulData
 
+/**
+ * A message parsing strategy where all fields except the data field have a constant length.
+ * The length field is required.
+ */
 class LengthParseStrategy(private val parts: List<Part>) : ParseStrategy {
 
     private val mirror : Int = if(parts.any { it is Mirror }) parts.first { it is Mirror }.getBytesInMessage()[0] else -1

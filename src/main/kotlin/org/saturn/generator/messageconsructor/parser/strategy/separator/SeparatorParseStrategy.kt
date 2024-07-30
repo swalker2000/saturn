@@ -14,6 +14,9 @@ import org.saturn.generator.messageconsructor.parser.strategy.CommonCheckItems
 import org.saturn.generator.messageconsructor.parser.strategy.ParseStrategy
 import org.saturn.generator.usefuldata.UsefulData
 
+/**
+ * A message parsing strategy where fields are separated by a special character.
+ */
 class SeparatorParseStrategy(private val parts: List<Part>) : ParseStrategy {
 
 

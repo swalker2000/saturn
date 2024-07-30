@@ -2,16 +2,18 @@ package org.saturn.generator.messageconsructor.parser.strategy
 
 import org.saturn.generator.usefuldata.UsefulData
 
+/**
+ * Message parsing strategy.
+ */
 interface ParseStrategy {
 
     /**
-     * Соответствует ли данное сообщение протоколу.
+     * Check if the message is valid.
      */
     fun check(data : List<Int>) : CheckResult
 
     /**
-     * Получить полезные данные из сообщения.
-     * прим. поля data, command
+     * Parse the message.
      */
     fun parse(data : List<Int>) : UsefulData
 

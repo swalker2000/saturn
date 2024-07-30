@@ -5,6 +5,9 @@ import org.saturn.generator.messageconsructor.data.depends.length.Length
 import org.saturn.generator.messageconsructor.data.hardcode.onebyte.Prefix
 import org.saturn.generator.messageconsructor.data.hardcode.onebyte.Suffix
 
+/**
+ * A set of message verification functions.
+ */
 class CommonCheckItems(private val partsNoSeparator: List<Part>) {
 
     fun interface Examination

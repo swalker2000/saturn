@@ -26,11 +26,17 @@ class Parser(private val parts: List<Part>) {
             Exception("Format not support!")
     }
 
+    /**
+     * Check if the message is valid.
+     */
     fun check(data : List<Int>) : CheckResult
     {
         return parseStrategy.check(data)
     }
 
+    /**
+     * Parse the message.
+     */
     fun parse(data : List<Int>) : UsefulData
     {
         return parseStrategy.parse(data)
