@@ -6,24 +6,28 @@ import org.saturn.generator.messageconsructor.data.hardcode.onebyte.Mirror
 import org.saturn.generator.messageconsructor.data.hardcode.onebyte.Separator
 import org.saturn.generator.messageconsructor.parser.strategy.CheckResult
 import org.saturn.generator.messageconsructor.parser.strategy.ParseStrategy
+import org.saturn.generator.messageconsructor.parser.strategy.ParseStrategySelector
 import org.saturn.generator.messageconsructor.parser.strategy.length.LengthParseStrategy
+import org.saturn.generator.messageconsructor.parser.strategy.length.LengthParseStrategySelector
 import org.saturn.generator.messageconsructor.parser.strategy.separator.SeparatorParseStrategy
+import org.saturn.generator.messageconsructor.parser.strategy.separator.SeparatorParseStrategySelector
 import org.saturn.generator.usefuldata.UsefulData
 
 class Parser(private val parts: List<Part>) {
 
     private lateinit var parseStrategy: ParseStrategy
+    private val parseStrategySelectorList : List<ParseStrategySelector<out ParseStrategy>> = listOf(
+        LengthParseStrategySelector(),
+        SeparatorParseStrategySelector()
+    )
     init {
-        if(parts.any { it is Separator })
+        val validStrategies = parseStrategySelectorList.filter { it.check(parts) }
+        if(validStrategies.isNotEmpty())
         {
-            parseStrategy = SeparatorParseStrategy(parts)
-        }
-        else if(parts.any{it is Length})
-        {
-            parseStrategy = LengthParseStrategy(parts)
+            parseStrategy = validStrategies.first().getParseStrategy(parts)
         }
         else
-            Exception("Format not support!")
+            throw Exception("Format not support!")
     }
 
     /**
